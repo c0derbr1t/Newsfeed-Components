@@ -85,10 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  // Add an article
+  {
+    title: 'Small Kitty, Warm Kitty, Little Balls of Claws',
+    date: 'Dec 4th, 2019',
+    firstParagraph: "Cat ipsum dolor sit amet, take a big fluffing crap 💩 stare at ceiling light yet grab pompom in mouth and put in water dish yet if it smells like fish eat as much as you wish. Kitty pounce, trip, faceplant you didn't see that no you didn't definitely didn't lick, lick, lick, and preen away the embarrassment claw at curtains stretch and yawn nibble on tuna ignore human bite human hand pushes butt to face loves cheeseburgers but no, you can't close the door.",
+
+    secondParagraph: "Furrier and even more furrier hairball get scared by sudden appearance of cucumber but more napping, more napping all the napping is exhausting stare at ceiling, or tuxedo cats always looking dapper so attack dog, run away and pretend to be victim stand with legs in litter box, but poop outside. Shake treat bag. Eat half my food and ask for more meow go back to sleep owner brings food and water tries to pet on head, so scratch get sprayed by water because bad cat or purr when being pet",
+    
+    thirdParagraph: "Massacre a bird in the living room and then look like the cutest and most innocent animal on the planet mesmerizing birds purr when give birth instantly break out into full speed gallop across the house for no reason then cats take over the world but i is not fat, i is fluffy. Chew master's slippers pee on walls it smells like breakfast poop on couch or mark territory, but bird bird bird bird bird bird human why take bird out i could have eaten that claws in your leg. Howl uncontrollably for no reason bite off human's toes."
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+/* 
+
+***Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
     <h2>{title of the article}</h2>
@@ -99,16 +111,69 @@ const data = [
     <span class='expandButton'></span>
   </div>
 
-  Hint: You will need to use createElement more than once here!
+ ** Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+ ** Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+ ** Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
-  Step 3: return the entire component.
+ ** Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+ ** Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+// Create function that creates an article
+function createArticle (title, date, first, second, third) {
+  // Create elements for html
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstPara = document.createElement('p');
+  const secondPara = document.createElement('p');
+  const thirdPara = document.createElement('p');
+  const expand = document.createElement('span');
+
+  // Add classes to elements
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  firstPara.classList.add('content');
+  secondPara.classList.add('content');
+  thirdPara.classList.add('content');
+  expand.classList.add('expandButton');
+
+  // Add text content to elements
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  firstPara.textContent = first;
+  secondPara.textContent = second;
+  thirdPara.textContent = third;
+  expand.textContent = '\u23EC';
+
+  // Arrow was too small, so I fixed it
+  expand.style.fontSize = '1.1em';
+
+  // Add article parts to article div
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstPara);
+  article.appendChild(secondPara);
+  article.appendChild(thirdPara);
+  article.appendChild(expand);
+
+// add event listener to show and hide the paragraphs
+expand.addEventListener('click', () => {
+  article.classList.toggle('article-open');
+})
+  return article;
+}
+
+// Set parent container to hold articles
+const container = document.querySelector('.articles');
+
+// add articles based on data array objects
+data.forEach(item => {
+  container.appendChild(createArticle(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph));
+})
