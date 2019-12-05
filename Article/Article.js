@@ -172,8 +172,10 @@ expand.addEventListener('click', () => {
   article.classList.toggle('article-open');
   if (expand.textContent == '\u25D2') {
     expand.textContent = '\u25D3';
+    article.style.backgroundColor = '#eafaea';
   } else {
     expand.textContent = '\u25D2';
+    article.style.backgroundColor = 'white';
   };
 })
 

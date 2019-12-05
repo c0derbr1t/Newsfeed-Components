@@ -49,6 +49,15 @@ function createMenu (items) {
     const listItem = document.createElement('li');
     listItem.textContent = item;
     list.appendChild(listItem);
+
+    listItem.addEventListener('mouseenter', () => {
+      listItem.style.backgroundColor = '#388E3C';
+      listItem.style.borderRadius = '25px 0 0 25px';
+    })
+
+    listItem.addEventListener('mouseleave', () => {
+      listItem.style.backgroundColor = '#81C784';
+    })
   })
 
   // add the list of menu items to the menu div
@@ -61,6 +70,14 @@ function createMenu (items) {
   menuButton.addEventListener('click', () => {
     menu.classList.toggle('menu--open');
   })
+
+  // listItem.addEventListener('mouseenter', () => {
+  //   listItem.style.backgroundColor = '#388E3C';
+  // })
+
+  // listItem.addEventListener('mouseleave', () => {
+  //   listItem.style.backgroundColor = '#81C784';
+  // })
 
   return menu;
 }
