@@ -135,6 +135,7 @@ function createArticle (title, date, first, second, third) {
   const secondPara = document.createElement('p');
   const thirdPara = document.createElement('p');
   const expand = document.createElement('span');
+  const closeButton = document.createElement('div')
 
   // Add classes to elements
   article.classList.add('article');
@@ -143,6 +144,7 @@ function createArticle (title, date, first, second, third) {
   secondPara.classList.add('content');
   thirdPara.classList.add('content');
   expand.classList.add('expandButton');
+  closeButton.classList.add('close');
 
   // Add text content to elements
   articleTitle.textContent = title;
@@ -150,10 +152,11 @@ function createArticle (title, date, first, second, third) {
   firstPara.textContent = first;
   secondPara.textContent = second;
   thirdPara.textContent = third;
-  expand.textContent = '\u23EC';
+  expand.textContent = '\u25D2';
+  closeButton.textContent = '\u29BB';
 
   // Arrow was too small, so I fixed it
-  expand.style.fontSize = '1.1em';
+  expand.style.fontSize = '1.2rem';
 
   // Add article parts to article div
   article.appendChild(articleTitle);
@@ -162,13 +165,34 @@ function createArticle (title, date, first, second, third) {
   article.appendChild(secondPara);
   article.appendChild(thirdPara);
   article.appendChild(expand);
+  article.prepend(closeButton);
 
 // add event listener to show and hide the paragraphs
 expand.addEventListener('click', () => {
   article.classList.toggle('article-open');
+  if (expand.textContent == '\u25D2') {
+    expand.textContent = '\u25D3';
+  } else {
+    expand.textContent = '\u25D2';
+  };
 })
+
+closeButton.addEventListener('click', () => {
+  article.style.display = 'none';
+})
+
+closeButton.addEventListener('mouseenter', () => {
+  closeButton.style.color = '#ac0022';
+})
+
+closeButton.addEventListener('mouseleave', () => {
+  closeButton.style.color = '#388E3C';
+})
+
   return article;
 }
+
+
 
 // Set parent container to hold articles
 const container = document.querySelector('.articles');
